@@ -6,3 +6,4 @@ class State(Enum):
     OPTION = 2
     GAME = 3
     PAUSE = 4
+    QUIT = 5

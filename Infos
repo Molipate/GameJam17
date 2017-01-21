@@ -6,9 +6,12 @@ Images :
 Mobs :
 ~ 10 types de mobs
 
-Map :
--> 900 * 600
+Window :
+-> 875 * 690
+
+-> Map :
+35 * 25 = 875 / 35 * 14 = 490
 
 Sprites :
--> 20px * 20px
+-> 35px * 35px
 
