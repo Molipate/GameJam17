@@ -8,8 +8,12 @@ from Game import Game
 
 
 def WaveCraft():
+
     pygame.init()
     pygame.font.init()
+
+    clock = pygame.time.Clock()
+    dt = clock.tick(60)
 
     state = GameState()
     mainMenu = MainMenu()
@@ -21,14 +25,6 @@ def WaveCraft():
 
     main_Loop = True
     while main_Loop:
-
-        # render here
-        screen.fill((255, 255, 255))
-        if state.getCurrentState() == State.MENU:
-            mainMenu.render(screen)
-        if state.getCurrentState() == State.GAME:
-            game.render(screen)
-        pygame.display.update()
 
         # Handle Event
         for event in pygame.event.get():
@@ -45,8 +41,22 @@ def WaveCraft():
                 if res == State.QUIT:
                     state.removeFirstState()
 
+        # render here
+        screen.fill((255, 255, 255))
+
+        if state.getCurrentState() == State.MENU:
+            mainMenu.render(screen)
+        if state.getCurrentState() == State.GAME:
+            game.render(screen)
+        pygame.display.update()
+
         # Update frame
+        game.update(dt)
+
+        dt = clock.tick(60)
+
+
 
 if __name__ == '__main__':
-    os.environ['SDL_VIDEO_WINDOW_POS'] = "50,50"
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "5,5"
     WaveCraft()

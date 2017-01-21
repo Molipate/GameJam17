@@ -5,13 +5,12 @@ from Player import Player
 from State import State
 from Interface.GameInterface import GameInterface
 from Blocks import Blocks
+from Mob import Mob
 from Tower import Tower
 
 
 class Game:
     def __init__(self):
-
-        self.cost = 1
 
         self.selectedItem = False
 
@@ -23,6 +22,8 @@ class Game:
         self.player.life = 20
 
         # Entity (mobs and towers)
+        self.mobList = [Mob(), Mob()]
+
         self.towers = []
         self.tower = Tower()
         self.tower2 = Tower()
@@ -36,6 +37,8 @@ class Game:
         screen.blit(pygame.font.Font(None, 60).render(str(self.player.money), True, (0, 0, 0)), (750, 250))
         # Interface
         self.interface.render(screen, self.tower, self.tower2, self.tower3)
+
+        self.mobList[0].render(screen)
 
     def proceedEvent(self, event):
 
@@ -81,4 +84,6 @@ class Game:
                 if 0 <= pygame.mouse.get_pos()[1] / 35 < 15:
                     self.map.setCell(pygame.mouse.get_pos(), self.selectedItem)
 
-
+    def update(self, dt):
+        for m in self.mobList:
+            m.update(dt)
