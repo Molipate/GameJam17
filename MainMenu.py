@@ -17,6 +17,10 @@ class MainMenu:
 
     def proceedEvent(self, event):
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                return State.QUIT
+
         if event.type == pygame.MOUSEMOTION:
             if self.playButton.hover(pygame.mouse.get_pos()):
                 self.playButton.setSelected(True)

@@ -32,8 +32,6 @@ def WaveCraft():
 
         # Handle Event
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                main_Loop = False
 
             if state.getCurrentState() == State.MENU:
                 res = mainMenu.proceedEvent(event)
@@ -41,6 +39,11 @@ def WaveCraft():
                     main_Loop = False
                 if res == State.GAME:
                     state.addState(State.GAME)
+
+            if state.getCurrentState() == State.GAME:
+                res = game.proceedEvent(event)
+                if res == State.QUIT:
+                    state.removeFirstState()
 
 
         # Update frame

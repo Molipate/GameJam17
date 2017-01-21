@@ -28,6 +28,7 @@ class Button:
         if self.x <= mouse_pos[0] <= self.x + self.width:
             if self.y <= mouse_pos[1] <= self.y + self.height:
                 return True
+        return False
 
     def setSelected(self, s):
         self.selected = s

@@ -1,28 +1,47 @@
 import pygame
 
 from Map import Map
+from State import State
+from Interface.GameInterface import GameInterface
+from Towers import Towers
 
 
 class Game:
-
     def __init__(self):
 
-        #Interface
-        self.interface = pygame.Rect(0, 525, 875, 165)
+        self.selectedItem = False
+        # Interface
+        self.interface = GameInterface()
 
-        #Map
+        # Map
         self.map = Map()
 
-        #Entity (mobs and towers)
+        # Entity (mobs and towers)
 
     def render(self, screen):
-
         screen.fill((0, 0, 0))
-
-        #Interface
-        pygame.draw.rect(screen, (240, 200, 0), self.interface)
 
         self.map.render(screen)
         # -> Entite
 
+        # Interface
+        self.interface.render(screen)
+
         pass
+
+    def proceedEvent(self, event):
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                return State.QUIT
+
+        if self.interface.proceedEvent(event) == Towers.BASIC:
+            self.selectedItem = Towers.BASIC
+
+        if event.type == pygame.MOUSEBUTTONUP:
+            if self.selectedItem is not False:
+                print pygame.mouse.get_pos()[0] % 35, pygame.mouse.get_pos()[1] % 35
+                #if 0 <= pygame.mouse.get_pos()[0] % 35 <= 25:
+                    #if 0 <= pygame.mouse.get_pos()[1] % 35 <= 15:
+
+
