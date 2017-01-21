@@ -2,10 +2,11 @@ import pygame
 
 from Button import Button
 from Blocks import Blocks
+from Tower import Tower
+from Player import Player
 
 
 class TowersArea:
-
     def __init__(self):
         self.background = pygame.Rect(155, 525, 360, 200)
 
@@ -16,14 +17,17 @@ class TowersArea:
         self.tower5 = Button(283, 630, 105, 90)
         self.tower6 = Button(403, 630, 105, 90)
 
-    def render(self, screen):
+    def render(self, screen, towerLVL, tower2LVL, tower3LVL):
         pygame.draw.rect(screen, (75, 75, 75), self.background)
         self.tower.render(screen)
         self.tower2.render(screen)
         self.tower3.render(screen)
         self.tower4.render(screen)
+        screen.blit(pygame.font.Font(None, 60).render(str(towerLVL.level), True, (0, 0, 0)), (203, 660))
         self.tower5.render(screen)
+        screen.blit(pygame.font.Font(None, 60).render(str(tower2LVL.level), True, (0, 0, 0)), (325, 660))
         self.tower6.render(screen)
+        screen.blit(pygame.font.Font(None, 60).render(str(tower3LVL.level), True, (0, 0, 0)), (445, 660))
 
     def proceedEvent(self, event):
 
@@ -66,7 +70,7 @@ class TowersArea:
 
         if event.type == pygame.MOUSEBUTTONUP:
             # Tour 1 Select
-            if self.tower.hover(pygame.mouse.get_pos())and not self.tower.selected:
+            if self.tower.hover(pygame.mouse.get_pos()) and not self.tower.selected:
                 self.tower.setSelected(True)
                 self.tower2.setSelected(False)
                 self.tower3.setSelected(False)
@@ -74,7 +78,7 @@ class TowersArea:
                 self.tower5.setSelected(False)
                 self.tower6.setSelected(False)
                 return Blocks.BASIC_TOWER
-            elif self.tower.hover(pygame.mouse.get_pos())and self.tower.selected:
+            elif self.tower.hover(pygame.mouse.get_pos()) and self.tower.selected:
                 self.tower.setSelected(False)
                 self.tower2.setSelected(False)
                 self.tower3.setSelected(False)
@@ -82,7 +86,6 @@ class TowersArea:
                 self.tower5.setSelected(False)
                 self.tower6.setSelected(False)
                 return Blocks.BASIC_TOWER
-
 
             # Tour 2 Select
             if self.tower2.hover(pygame.mouse.get_pos()) and not self.tower2.selected:
@@ -101,7 +104,6 @@ class TowersArea:
                 self.tower5.setSelected(False)
                 self.tower6.setSelected(False)
                 return Blocks.MAGIC_TOWER
-
 
             # Tour 3 Select
             if self.tower3.hover(pygame.mouse.get_pos()) and not self.tower3.selected:
@@ -122,55 +124,23 @@ class TowersArea:
                 return Blocks.FROST_TOWER
 
             # Tour 4 Select
-            if self.tower4.hover(pygame.mouse.get_pos())and not self.tower4.selected:
-                self.tower4.setSelected(True)
+            if self.tower4.hover(pygame.mouse.get_pos()):
+
                 self.tower.setSelected(False)
                 self.tower2.setSelected(False)
                 self.tower3.setSelected(False)
-                self.tower5.setSelected(False)
-                self.tower6.setSelected(False)
-                return Blocks.BASIC_TOWER
-            elif self.tower4.hover(pygame.mouse.get_pos())and self.tower4.selected:
-                self.tower4.setSelected(False)
-                self.tower.setSelected(False)
-                self.tower2.setSelected(False)
-                self.tower3.setSelected(False)
-                self.tower5.setSelected(False)
-                self.tower6.setSelected(False)
-                return Blocks.BASIC_TOWER
+                return "upgradeT1"
 
             # Tour 5 Select
-            if self.tower5.hover(pygame.mouse.get_pos())and not self.tower5.selected:
-                self.tower5.setSelected(True)
+            if self.tower5.hover(pygame.mouse.get_pos()):
                 self.tower.setSelected(False)
                 self.tower2.setSelected(False)
                 self.tower3.setSelected(False)
-                self.tower4.setSelected(False)
-                self.tower6.setSelected(False)
-                return Blocks.MAGIC_TOWER
-            elif self.tower5.hover(pygame.mouse.get_pos())and self.tower5.selected:
-                self.tower5.setSelected(False)
-                self.tower.setSelected(False)
-                self.tower2.setSelected(False)
-                self.tower3.setSelected(False)
-                self.tower4.setSelected(False)
-                self.tower6.setSelected(False)
-                return Blocks.MAGIC_TOWER
+                return "upgradeT2"
 
             # Tour 6 Select
-            if self.tower6.hover(pygame.mouse.get_pos())and not self.tower6.selected:
-                self.tower6.setSelected(True)
+            if self.tower6.hover(pygame.mouse.get_pos()):
                 self.tower.setSelected(False)
                 self.tower2.setSelected(False)
                 self.tower3.setSelected(False)
-                self.tower4.setSelected(False)
-                self.tower5.setSelected(False)
-                return Blocks.FROST_TOWER
-            elif self.tower6.hover(pygame.mouse.get_pos())and self.tower6.selected:
-                self.tower6.setSelected(False)
-                self.tower.setSelected(False)
-                self.tower2.setSelected(False)
-                self.tower3.setSelected(False)
-                self.tower4.setSelected(False)
-                self.tower5.setSelected(False)
-                return Blocks.FROST_TOWER
+                return "upgradeT3"

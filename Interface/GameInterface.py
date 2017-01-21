@@ -12,9 +12,9 @@ class GameInterface:
         self.towersArea = TowersArea()
         self.monstersArea = MonstersArea()
 
-    def render(self, screen):
+    def render(self, screen, towerLVL, tower2LVL, tower3LVL):
         pygame.draw.rect(screen, (240, 200, 0), self.background)
-        self.towersArea.render(screen)
+        self.towersArea.render(screen, towerLVL, tower2LVL, tower3LVL)
         self.monstersArea.render(screen)
 
     def proceedEvent(self, event):
