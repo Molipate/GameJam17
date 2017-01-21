@@ -14,3 +14,4 @@ class Blocks(Enum):
     ARROW = 9
     BASIC_TOWER = 10
     GRASS = 11
+    MAGIC_TOWER = 12

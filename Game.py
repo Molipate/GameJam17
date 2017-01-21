@@ -32,9 +32,14 @@ class Game:
                 return State.QUIT
 
         res = self.interface.proceedEvent(event)
+
         if res == Blocks.BASIC_TOWER and self.selectedItem != Blocks.BASIC_TOWER:
             self.selectedItem = Blocks.BASIC_TOWER
         elif res == Blocks.BASIC_TOWER and self.selectedItem == Blocks.BASIC_TOWER:
+            self.selectedItem = False
+        elif res == Blocks.MAGIC_TOWER and self.selectedItem != Blocks.MAGIC_TOWER:
+            self.selectedItem = Blocks.MAGIC_TOWER
+        elif res == Blocks.MAGIC_TOWER and self.selectedItem == Blocks.MAGIC_TOWER:
             self.selectedItem = False
 
         if event.type == pygame.MOUSEBUTTONUP:

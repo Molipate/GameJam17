@@ -17,6 +17,7 @@ class Map:
         self.rightBorder = pygame.image.load("Assets/right_border.png")
         self.arrow = pygame.image.load("Assets/arrow.png")
         self.basicTower = pygame.image.load("Assets/basic_tower.png")
+        self.magicTower = pygame.image.load("Assets/magic_tower.png")
         self.grass = pygame.image.load("Assets/weed.png")
 
         self.tab = []
@@ -74,6 +75,8 @@ class Map:
                     screen.blit(self.grass, (i * 35, j * 35))
                 if self.tab[i][j] == Blocks.BASIC_TOWER:
                     screen.blit(self.basicTower, (i * 35, j * 35))
+                if self.tab[i][j] == Blocks.MAGIC_TOWER:
+                    screen.blit(self.magicTower, (i * 35, j * 35))
 
     def setCell(self, mouse_pos, value):
         if self.tab[mouse_pos[0] / 35][mouse_pos[1] / 35] == Blocks.EMPTY:
