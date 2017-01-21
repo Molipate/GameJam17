@@ -5,6 +5,9 @@ class Button:
     def __init__(self, x, y, width, height):
 
         self.name = pygame.font.Font(None, 60)
+
+        self.mouseHover = False
+
         self.selected = False
 
         # VARIALBES DU BOUTON
@@ -28,8 +31,10 @@ class Button:
         self.txtPosY = 0
 
     def render(self, screen):
-        if self.selected:
+        if self.mouseHover:
             pygame.draw.rect(screen, (255, 40, 0), self.background)
+        elif self.selected:
+            pygame.draw.rect(screen, (0, 255, 0), self.background)
         else:
             pygame.draw.rect(screen, (0, 0, 0), self.background)
 
@@ -43,6 +48,9 @@ class Button:
                 return True
         return False
 
+    def setMouseHover(self, h):
+        self.mouseHover = h
+
     def setSelected(self, s):
         self.selected = s
 
@@ -50,5 +58,5 @@ class Button:
         self.txt = str
         self.txtWidth = pygame.font.Font(None, 60).size(self.txt)[0]
         self.txtHeight = pygame.font.Font(None, 60).size(self.txt)[1]
-        self.txtPosX = (self.x) + ((self.width) / 2) - (self.txtWidth / 2)
-        self.txtPosY = (self.y) + ((self.height) / 2) - (self.txtHeight / 2)
+        self.txtPosX = self.x + (self.width / 2) - (self.txtWidth / 2)
+        self.txtPosY = self.y + (self.height / 2) - (self.txtHeight / 2)

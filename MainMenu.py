@@ -25,13 +25,14 @@ class MainMenu:
 
         if event.type == pygame.MOUSEMOTION:
             if self.playButton.hover(pygame.mouse.get_pos()):
-                self.playButton.setSelected(True)
+                self.playButton.setMouseHover(True)
             else:
-                self.playButton.setSelected(False)
+                self.playButton.setMouseHover(False)
+
             if self.quitButton.hover(pygame.mouse.get_pos()):
-                self.quitButton.setSelected(True)
+                self.quitButton.setMouseHover(True)
             else:
-                self.quitButton.setSelected(False)
+                self.quitButton.setMouseHover(False)
 
         if event.type == pygame.MOUSEBUTTONUP:
             if self.playButton.hover(pygame.mouse.get_pos()):
