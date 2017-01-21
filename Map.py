@@ -2,11 +2,11 @@ import pygame
 
 from Blocks import Blocks
 
-class Map:
 
+class Map:
     def __init__(self):
 
-        self.way = pygame.image.load("Assets/way.png")
+        self.empty = pygame.image.load("Assets/empty.png")
         self.topBorder = pygame.image.load("Assets/top_border.png")
         self.topLeftBorder = pygame.image.load("Assets/top_left_corner.png")
         self.topRightBorder = pygame.image.load("Assets/top_right_corner.png")
@@ -43,16 +43,14 @@ class Map:
             self.tab[0][7] = Blocks.ARROW
             self.tab[24][7] = Blocks.ARROW
 
-        self.checkWay(0, 7)
-
     def render(self, screen):
 
         for i in range(25):
             for j in range(15):
-                if self.tab[i][j] == Blocks.WAY:
-                    screen.blit(self.way, (i * 35, j * 35))
+                if self.tab[i][j] == Blocks.EMPTY:
+                    screen.blit(self.empty, (i * 35, j * 35))
                 if self.tab[i][j] == Blocks.TOP_LEFT_BORDER:
-                    screen.blit(self.topLeftBorder, (i * 35, j *35))
+                    screen.blit(self.topLeftBorder, (i * 35, j * 35))
                 if self.tab[i][j] == Blocks.TOP_RIGHT_BORDER:
                     screen.blit(self.topRightBorder, (i * 35, j * 35))
                 if self.tab[i][j] == Blocks.TOP_BORDER:
@@ -62,7 +60,7 @@ class Map:
                 if self.tab[i][j] == Blocks.RIGHT_BORDER:
                     screen.blit(self.rightBorder, (i * 35, j * 35))
                 if self.tab[i][j] == Blocks.BOT_LEFT_BORDER:
-                    screen.blit(self.botLeftBorder, (i * 35, j *35))
+                    screen.blit(self.botLeftBorder, (i * 35, j * 35))
                 if self.tab[i][j] == Blocks.BOT_RIGHT_BORDER:
                     screen.blit(self.botRightBorder, (i * 35, j * 35))
                 if self.tab[i][j] == Blocks.BOT_BORDER:
@@ -73,8 +71,5 @@ class Map:
                     screen.blit(self.basicTower, (i * 35, j * 35))
 
     def setCell(self, mouse_pos, value):
-        if self.tab[mouse_pos[0] / 35][mouse_pos[1] / 35] == 0:
+        if self.tab[mouse_pos[0] / 35][mouse_pos[1] / 35] == Blocks.EMPTY:
             self.tab[mouse_pos[0] / 35][mouse_pos[1] / 35] = value
-
-
-    def checkWay(self, x, y):
