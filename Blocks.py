@@ -13,4 +13,4 @@ class Blocks(Enum):
     TOP_RIGHT_BORDER = 8
     ARROW = 9
     BASIC_TOWER = 10
-    WAY = 11
+    GRASS = 11

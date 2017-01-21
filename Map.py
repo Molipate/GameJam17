@@ -17,12 +17,15 @@ class Map:
         self.rightBorder = pygame.image.load("Assets/right_border.png")
         self.arrow = pygame.image.load("Assets/arrow.png")
         self.basicTower = pygame.image.load("Assets/basic_tower.png")
+        self.grass = pygame.image.load("Assets/weed.png")
 
         self.tab = []
         for i in range(25):
             self.tab.append([])
             for j in range(15):
                 self.tab[i].append(0)
+
+
 
         self.tab[0][0] = Blocks.TOP_LEFT_BORDER
         self.tab[24][0] = Blocks.TOP_RIGHT_BORDER
@@ -67,6 +70,8 @@ class Map:
                     screen.blit(self.botBorder, (i * 35, j * 35))
                 if self.tab[i][j] == Blocks.ARROW:
                     screen.blit(self.arrow, (i * 35, j * 35))
+                if self.tab[i][j] == Blocks.GRASS:
+                    screen.blit(self.grass, (i * 35, j * 35))
                 if self.tab[i][j] == Blocks.BASIC_TOWER:
                     screen.blit(self.basicTower, (i * 35, j * 35))
 
