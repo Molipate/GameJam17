@@ -49,5 +49,5 @@ def WaveCraft():
         # Update frame
 
 if __name__ == '__main__':
-    os.environ['SDL_VIDEO_WINDOW_POS'] = "10,10"
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "50,50"
     WaveCraft()
