@@ -19,6 +19,7 @@ class Map:
         self.basicTower = pygame.image.load("Assets/basic_tower.png")
         self.magicTower = pygame.image.load("Assets/magic_tower.png")
         self.grass = pygame.image.load("Assets/weed.png")
+        self.frostTower = pygame.image.load("Assets/frost_tower.png")
 
         self.tab = []
         for i in range(25):
@@ -87,6 +88,8 @@ class Map:
                     screen.blit(self.basicTower, (i * 35, j * 35))
                 if self.tab[i][j] == Blocks.MAGIC_TOWER:
                     screen.blit(self.magicTower, (i * 35, j * 35))
+                if self.tab[i][j] == Blocks.FROST_TOWER:
+                    screen.blit(self.frostTower, (i * 35, j * 35))
 
     def setCell(self, mouse_pos, value):
         if self.tab[mouse_pos[0] / 35][mouse_pos[1] / 35] == Blocks.EMPTY:

@@ -111,7 +111,7 @@ class TowersArea:
                 self.tower4.setSelected(False)
                 self.tower5.setSelected(False)
                 self.tower6.setSelected(False)
-                return Blocks.BASIC_TOWER
+                return Blocks.FROST_TOWER
             elif self.tower3.hover(pygame.mouse.get_pos()) and self.tower3.selected:
                 self.tower3.setSelected(False)
                 self.tower.setSelected(False)
@@ -119,7 +119,7 @@ class TowersArea:
                 self.tower4.setSelected(False)
                 self.tower5.setSelected(False)
                 self.tower6.setSelected(False)
-                return Blocks.BASIC_TOWER
+                return Blocks.FROST_TOWER
 
             # Tour 4 Select
             if self.tower4.hover(pygame.mouse.get_pos())and not self.tower4.selected:
@@ -165,7 +165,7 @@ class TowersArea:
                 self.tower3.setSelected(False)
                 self.tower4.setSelected(False)
                 self.tower5.setSelected(False)
-                return Blocks.BASIC_TOWER
+                return Blocks.FROST_TOWER
             elif self.tower6.hover(pygame.mouse.get_pos())and self.tower6.selected:
                 self.tower6.setSelected(False)
                 self.tower.setSelected(False)
@@ -173,4 +173,4 @@ class TowersArea:
                 self.tower3.setSelected(False)
                 self.tower4.setSelected(False)
                 self.tower5.setSelected(False)
-                return Blocks.BASIC_TOWER
+                return Blocks.FROST_TOWER

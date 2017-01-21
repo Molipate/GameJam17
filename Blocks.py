@@ -15,3 +15,4 @@ class Blocks(Enum):
     BASIC_TOWER = 10
     GRASS = 11
     MAGIC_TOWER = 12
+    FROST_TOWER = 13

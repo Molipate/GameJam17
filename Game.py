@@ -41,6 +41,10 @@ class Game:
             self.selectedItem = Blocks.MAGIC_TOWER
         elif res == Blocks.MAGIC_TOWER and self.selectedItem == Blocks.MAGIC_TOWER:
             self.selectedItem = False
+        elif res == Blocks.FROST_TOWER and self.selectedItem != Blocks.FROST_TOWER:
+            self.selectedItem = Blocks.FROST_TOWER
+        elif res == Blocks.FROST_TOWER and self.selectedItem == Blocks.FROST_TOWER:
+            self.selectedItem = False
 
         if event.type == pygame.MOUSEBUTTONUP:
             if self.selectedItem is not False:
