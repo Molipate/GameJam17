@@ -7,14 +7,15 @@ from State import State
 class MainMenu:
     def __init__(self):
         self.title = pygame.font.Font(None, 60).render("WaveCraft", True, (0, 0, 0))
-        self.btnPlay = pygame.font.Font(None, 60).render("Play", True, (0, 0, 0))
         self.playButton = Button(100, 100, 150, 150)
         self.quitButton = Button(100, 275, 150, 150)
 
     def render(self, screen):
         screen.blit(self.title, (450, 250))
         self.playButton.render(screen)
+        self.playButton.setText("PLAY")
         self.quitButton.render(screen)
+        self.quitButton.setText("QUIT")
 
     def proceedEvent(self, event):
 
