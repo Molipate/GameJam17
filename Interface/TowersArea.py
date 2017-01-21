@@ -1,7 +1,7 @@
 import pygame
 
 from Button import Button
-from Towers import Towers
+from Blocks import Blocks
 
 
 class TowersArea:
@@ -25,6 +25,6 @@ class TowersArea:
 
         if event.type == pygame.MOUSEBUTTONUP:
             if self.tower.hover(pygame.mouse.get_pos()):
-                return Towers.BASIC
+                return Blocks.BASIC_TOWER
 
 

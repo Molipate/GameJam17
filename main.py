@@ -45,7 +45,6 @@ def WaveCraft():
                 if res == State.QUIT:
                     state.removeFirstState()
 
-
         # Update frame
 
 if __name__ == '__main__':

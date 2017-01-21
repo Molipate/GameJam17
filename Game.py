@@ -3,17 +3,15 @@ import pygame
 from Map import Map
 from State import State
 from Interface.GameInterface import GameInterface
-from Towers import Towers
+from Blocks import Blocks
 
 
 class Game:
     def __init__(self):
 
         self.selectedItem = False
-        # Interface
-        self.interface = GameInterface()
 
-        # Map
+        self.interface = GameInterface()
         self.map = Map()
 
         # Entity (mobs and towers)
@@ -27,8 +25,6 @@ class Game:
         # Interface
         self.interface.render(screen)
 
-        pass
-
     def proceedEvent(self, event):
 
         if event.type == pygame.KEYDOWN:
@@ -36,11 +32,13 @@ class Game:
                 return State.QUIT
 
         res = self.interface.proceedEvent(event)
-
+        if res == Blocks.BASIC_TOWER and self.selectedItem != Blocks.BASIC_TOWER:
+            self.selectedItem = Blocks.BASIC_TOWER
+        elif res == Blocks.BASIC_TOWER and self.selectedItem == Blocks.BASIC_TOWER:
+            self.selectedItem = False
 
         if event.type == pygame.MOUSEBUTTONUP:
             if self.selectedItem is not False:
-                print pygame.mouse.get_pos()[0] / 35, pygame.mouse.get_pos()[1] / 35
                 if 0 <= pygame.mouse.get_pos()[1] / 35 < 15:
                     self.map.setCell(pygame.mouse.get_pos(), self.selectedItem)
 
