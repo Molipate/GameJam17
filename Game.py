@@ -35,13 +35,13 @@ class Game:
             if event.key == pygame.K_ESCAPE:
                 return State.QUIT
 
-        if self.interface.proceedEvent(event) == Towers.BASIC:
-            self.selectedItem = Towers.BASIC
+        res = self.interface.proceedEvent(event)
+
 
         if event.type == pygame.MOUSEBUTTONUP:
             if self.selectedItem is not False:
-                print pygame.mouse.get_pos()[0] % 35, pygame.mouse.get_pos()[1] % 35
-                #if 0 <= pygame.mouse.get_pos()[0] % 35 <= 25:
-                    #if 0 <= pygame.mouse.get_pos()[1] % 35 <= 15:
+                print pygame.mouse.get_pos()[0] / 35, pygame.mouse.get_pos()[1] / 35
+                if 0 <= pygame.mouse.get_pos()[1] / 35 < 15:
+                    self.map.setCell(pygame.mouse.get_pos(), self.selectedItem)
 
 

@@ -7,7 +7,7 @@ from Interface.TowersArea import TowersArea
 class GameInterface:
 
     def __init__(self):
-        self.background = pygame.Rect(0, 490, 875, 200)
+        self.background = pygame.Rect(0, 525, 875, 200)
 
         self.towersArea = TowersArea()
         self.monstersArea = MonstersArea()
@@ -18,4 +18,4 @@ class GameInterface:
         self.monstersArea.render(screen)
 
     def proceedEvent(self, event):
-        self.towersArea.proceedEvent(event)
+        return self.towersArea.proceedEvent(event)

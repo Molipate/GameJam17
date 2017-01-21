@@ -15,7 +15,7 @@ def WaveCraft():
     mainMenu = MainMenu()
     game = Game()
 
-    screen = pygame.display.set_mode((875, 690), pygame.NOFRAME)
+    screen = pygame.display.set_mode((875, 725), pygame.NOFRAME)
 
     state.addState(State.MENU)
 
@@ -49,5 +49,5 @@ def WaveCraft():
         # Update frame
 
 if __name__ == '__main__':
-    os.environ['SDL_VIDEO_WINDOW_POS'] = "50,50"
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "10,10"
     WaveCraft()

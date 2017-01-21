@@ -11,7 +11,7 @@ class Map:
         for i in range(25):
             self.tab.append([])
             for j in range(15):
-                self.tab[i].append(0)
+                self.tab[i].append(-1)
 
         for i in range(7):
             self.tab[0][i] = 1
@@ -23,7 +23,10 @@ class Map:
 
         for i in range(25):
             for j in range(15):
-                if self.tab[i][j] == 0:
+                if self.tab[i][j] == -1:
                     screen.blit(self.green, (i * 35, j * 35))
                 if self.tab[i][j] == 1:
                     screen.blit(self.red, (i * 35, j * 35))
+
+    def setCell(self, mouse_pos, value):
+        self.tab[mouse_pos[0] / 35][mouse_pos[1] / 35] = value
