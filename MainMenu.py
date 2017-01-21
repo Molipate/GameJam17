@@ -7,6 +7,7 @@ from State import State
 class MainMenu:
     def __init__(self):
         self.title = pygame.font.Font(None, 60).render("WaveCraft", True, (0, 0, 0))
+        self.btnPlay = pygame.font.Font(None, 60).render("Play", True, (0, 0, 0))
         self.playButton = Button(100, 100, 150, 150)
         self.quitButton = Button(100, 275, 150, 150)
 
