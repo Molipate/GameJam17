@@ -12,6 +12,8 @@ class BasicTower(Tower):
         self.costLv4 = 200
         self.costLv5 = 300
 
+        self.dmg = 10
+
     def getCost(self):
         if self.level == 1:
             return self.costLv1

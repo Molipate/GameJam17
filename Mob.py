@@ -6,8 +6,9 @@ from Directions import Directions
 class Mob:
     def __init__(self):
 
-        self.life = 10
+        self.life = 5000
         self.speed = 1
+        self.income = 50
 
         self.x = 35
         self.y = 245
@@ -54,6 +55,7 @@ class Mob:
             self.direction = Directions.TOP
         if 770 <= self.x <= 805 and 210 <= self.y <= 245:
             self.direction = Directions.RIGHT
+
 
     def render(self, screen):
         screen.blit(self.sprite, (self.x, self.y))

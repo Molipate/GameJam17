@@ -1,6 +1,7 @@
 import pygame
 
 from Interface.MonstersArea import MonstersArea
+from Interface.PlayerArea import PlayerArea
 from Interface.TowersArea import TowersArea
 
 
@@ -11,10 +12,12 @@ class GameInterface:
 
         self.towersArea = TowersArea()
         self.monstersArea = MonstersArea()
+        self.playerArea = PlayerArea()
 
-    def render(self, screen, towerLVL, tower2LVL, tower3LVL):
+    def render(self, screen, towerLVL, tower2LVL, tower3LVL, player):
         pygame.draw.rect(screen, (240, 200, 0), self.background)
         self.towersArea.render(screen, towerLVL, tower2LVL, tower3LVL)
+        self.playerArea.render(screen, player)
         self.monstersArea.render(screen)
 
     def proceedEvent(self, event):

@@ -9,7 +9,7 @@ from State import State
 from Interface.GameInterface import GameInterface
 from Blocks import Blocks
 from Mob import Mob
-from Tower import Tower
+from TowerCost import TowerCost
 
 
 class Game:
@@ -26,7 +26,7 @@ class Game:
         self.player.life = 20
 
         # Entity (mobs and towers)
-        self.mobList = [Mob(), Mob()]
+        self.mobList = [Mob()]
         self.towersList = []
         self.line = []
 
@@ -39,11 +39,12 @@ class Game:
 
         self.map.render(screen)
         # -> Entite
-        screen.blit(pygame.font.Font(None, 60).render(str(self.player.money), True, (0, 0, 0)), (750, 250))
+        screen.blit(pygame.font.Font(None, 60).render(str(self.player.money), True, (0, 0, 0)), (150, 600))
         # Interface
-        self.interface.render(screen, self.basicTower, self.magicTower, self.frostTower)
+        self.interface.render(screen, self.basicTower, self.magicTower, self.frostTower, self.player)
 
-        self.mobList[0].render(screen)
+        if len(self.mobList) > 0:
+            self.mobList[0].render(screen)
 
         for l in self.line:
             pygame.draw.line(screen, (0, 0, 0), l[0], l[1], 2)
@@ -57,7 +58,9 @@ class Game:
         res = self.interface.proceedEvent(event)
 
         if res == Blocks.BASIC_TOWER and self.selectedItem != Blocks.BASIC_TOWER:
-            self.selectedItem = Blocks.BASIC_TOWER
+            if self.player.money >= 20:
+                self.selectedItem = Blocks.BASIC_TOWER
+
         elif res == Blocks.BASIC_TOWER and self.selectedItem == Blocks.BASIC_TOWER:
             self.selectedItem = False
         elif res == Blocks.MAGIC_TOWER and self.selectedItem != Blocks.MAGIC_TOWER:
@@ -87,31 +90,44 @@ class Game:
         if event.type == pygame.MOUSEBUTTONUP:
             if self.selectedItem is not False:
                 if 0 <= pygame.mouse.get_pos()[1] / 35 < 15:
-                    if self.selectedItem == Blocks.BASIC_TOWER:
-                        self.map.setCell(pygame.mouse.get_pos(), self.selectedItem)
-                        self.basicTower = BasicTower()
-                        self.basicTower.posX = pygame.mouse.get_pos()[0] / 35
-                        self.basicTower.posY = pygame.mouse.get_pos()[1] / 35
-                        self.towersList.append(self.basicTower)
-                    elif self.selectedItem == Blocks.MAGIC_TOWER:
-                        self.map.setCell(pygame.mouse.get_pos(), self.selectedItem)
-                        self.magicTower = MagicTower()
-                        self.magicTower.posX = pygame.mouse.get_pos()[0] / 35
-                        self.magicTower.posY = pygame.mouse.get_pos()[1] / 35
-                        self.towersList.append(self.magicTower)
-                    elif self.selectedItem == Blocks.FROST_TOWER:
-                        self.map.setCell(pygame.mouse.get_pos(), self.selectedItem)
-                        self.frostTower = FrostTower()
-                        self.frostTower.posX = pygame.mouse.get_pos()[0] / 35
-                        self.frostTower.posY = pygame.mouse.get_pos()[1] / 35
-                        self.towersList.append(self.frostTower)
+                    if self.selectedItem == Blocks.BASIC_TOWER and self.player.money >= TowerCost.BASIC_TOWER:
+                        if self.map.setCell(pygame.mouse.get_pos(), self.selectedItem):
+                            self.basicTower = BasicTower()
+                            self.basicTower.posX = pygame.mouse.get_pos()[0] / 35
+                            self.basicTower.posY = pygame.mouse.get_pos()[1] / 35
+                            self.towersList.append(self.basicTower)
+                            self.player.money -= TowerCost.BASIC_TOWER
+                    elif self.selectedItem == Blocks.MAGIC_TOWER and self.player.money >= TowerCost.MAGIC_TOWER:
+                        if self.map.setCell(pygame.mouse.get_pos(), self.selectedItem):
+                            self.magicTower = MagicTower()
+                            self.magicTower.posX = pygame.mouse.get_pos()[0] / 35
+                            self.magicTower.posY = pygame.mouse.get_pos()[1] / 35
+                            self.towersList.append(self.magicTower)
+                            self.player.money -= TowerCost.MAGIC_TOWER
+                    elif self.selectedItem == Blocks.FROST_TOWER and self.player.money >= TowerCost.FROST_TOWER:
+                        if self.map.setCell(pygame.mouse.get_pos(), self.selectedItem):
+                            self.frostTower = FrostTower()
+                            self.frostTower.posX = pygame.mouse.get_pos()[0] / 35
+                            self.frostTower.posY = pygame.mouse.get_pos()[1] / 35
+                            self.towersList.append(self.frostTower)
+                            self.player.money -= TowerCost.FROST_TOWER
 
     def update(self, dt):
         for m in self.mobList:
             m.update(dt)
+            if 840 <= m.x <= 875 and 240 <= m.y <= 280:
+                self.mobList.remove(m)
+                self.player.life -= 1
+                print "life - 1"
 
         self.line = []
         for t in self.towersList:
             for m in self.mobList:
+
                 if t.posX - 4 < m.x / 35 < t.posX + 4 and t.posY - 4 < m.y / 35 < t.posY + 4:
-                    self.line.append(((t.posX * 35+35/2, t.posY * 35+35/2), (m.x+35/2, m.y+35/2)))
+                    self.line.append(((t.posX * 35 + 35 / 2, t.posY * 35 + 35 / 2), (m.x + 35 / 2, m.y + 35 / 2)))
+                    m.life -= t.dmg
+                    if m.life <= 0:
+                        self.player.money += m.income
+                        self.mobList.remove(m)
+                    print m.life
