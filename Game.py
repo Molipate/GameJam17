@@ -113,5 +113,5 @@ class Game:
         self.line = []
         for t in self.towersList:
             for m in self.mobList:
-                if t.posX - 2 < m.x / 35 < t.posX + 2 and t.posY - 2 < m.y / 35 < t.posY + 2:
-                    self.line.append(((t.posX * 35, t.posY * 35), (m.x, m.y)))
+                if t.posX - 4 < m.x / 35 < t.posX + 4 and t.posY - 4 < m.y / 35 < t.posY + 4:
+                    self.line.append(((t.posX * 35+35/2, t.posY * 35+35/2), (m.x+35/2, m.y+35/2)))
