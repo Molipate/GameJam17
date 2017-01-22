@@ -27,8 +27,9 @@ class Game:
 
         # Entity (mobs and towers)
         self.mobList = [Mob(), Mob()]
-
         self.towersList = []
+        self.line = []
+
         self.basicTower = BasicTower()
         self.magicTower = MagicTower()
         self.frostTower = FrostTower()
@@ -43,6 +44,9 @@ class Game:
         self.interface.render(screen, self.basicTower, self.magicTower, self.frostTower)
 
         self.mobList[0].render(screen)
+
+        for l in self.line:
+            pygame.draw.line(screen, (0, 0, 0), l[0], l[1], 2)
 
     def proceedEvent(self, event):
 
@@ -86,8 +90,8 @@ class Game:
                     if self.selectedItem == Blocks.BASIC_TOWER:
                         self.map.setCell(pygame.mouse.get_pos(), self.selectedItem)
                         self.basicTower = BasicTower()
-                        self.basicTower.posX = pygame.mouse.get_pos()[0]/35
-                        self.basicTower.posY = pygame.mouse.get_pos()[1]/35
+                        self.basicTower.posX = pygame.mouse.get_pos()[0] / 35
+                        self.basicTower.posY = pygame.mouse.get_pos()[1] / 35
                         self.towersList.append(self.basicTower)
                     elif self.selectedItem == Blocks.MAGIC_TOWER:
                         self.map.setCell(pygame.mouse.get_pos(), self.selectedItem)
@@ -105,3 +109,8 @@ class Game:
     def update(self, dt):
         for m in self.mobList:
             m.update(dt)
+        # self.line = []
+        for t in self.towersList:
+            for m in self.mobList:
+                if t.posX - 2 < m.x / 35 < t.posX + 2 and t.posY - 2 < m.y / 35 < t.posY + 2:
+                    self.line.append(((t.posX, t.posY), (m.x/35, m.y/35)))
