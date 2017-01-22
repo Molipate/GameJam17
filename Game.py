@@ -84,6 +84,7 @@ class Game:
                 if 0 <= pygame.mouse.get_pos()[1] / 35 < 15:
                     self.map.setCell(pygame.mouse.get_pos(), self.selectedItem)
 
+
     def update(self, dt):
         for m in self.mobList:
             m.update(dt)

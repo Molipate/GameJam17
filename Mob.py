@@ -7,7 +7,7 @@ class Mob:
     def __init__(self):
 
         self.life = 10
-        self.speed = 3
+        self.speed = 1
 
         self.x = 35
         self.y = 245

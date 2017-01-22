@@ -1,15 +1,16 @@
+from Tower import Tower
 
-class Tower:
+
+class MagicTower(Tower):
+
     def __init__(self):
+        Tower.__init__(self)
+
         self.costLv1 = 20
         self.costLv2 = 50
         self.costLv3 = 100
         self.costLv4 = 200
         self.costLv5 = 300
-        self.level = 1
-
-        self.posX = 0
-        self.posY = 0
 
     def getCost(self):
         if self.level == 1:
