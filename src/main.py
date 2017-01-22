@@ -40,6 +40,10 @@ def WaveCraft():
                 res = game.proceedEvent(event)
                 if res == State.QUIT:
                     state.removeFirstState()
+                if res == State.GAMEOVER:
+                    state.removeFirstState()
+                    game = Game()
+
 
         # render here
         screen.fill((255, 255, 255))
@@ -51,7 +55,8 @@ def WaveCraft():
         pygame.display.update()
 
         # Update frame
-        game.update(dt)
+        if state.getCurrentState() == State.GAME:
+            game.update(dt)
 
         dt = clock.tick(60)
 

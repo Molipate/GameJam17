@@ -1,4 +1,5 @@
 import pygame
+from pygame.event import Event
 
 from BasicTower import BasicTower
 from FrostTower import FrostTower
@@ -11,12 +12,14 @@ from Blocks import Blocks
 from Mob import Mob
 from TowerCost import TowerCost
 
-
 class Game:
     def __init__(self):
 
+        self.event = pygame.event.Event(pygame.KEYDOWN)
         self.selectedItem = False
         self.cost = 0
+        self.time = 0
+        self.exit = 0
 
         self.interface = GameInterface()
         self.map = Map()
@@ -39,17 +42,20 @@ class Game:
 
         self.map.render(screen)
         # -> Entite
-        screen.blit(pygame.font.Font(None, 60).render(str(self.player.money), True, (0, 0, 0)), (150, 600))
         # Interface
         self.interface.render(screen, self.basicTower, self.magicTower, self.frostTower, self.player)
 
         if len(self.mobList) > 0:
-            self.mobList[0].render(screen)
+            for m in self.mobList:
+                m.render(screen)
 
         for l in self.line:
             pygame.draw.line(screen, (0, 0, 0), l[0], l[1], 2)
 
     def proceedEvent(self, event):
+
+        if self.player.life <= 0:
+            return State.GAMEOVER
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
@@ -113,12 +119,17 @@ class Game:
                             self.player.money -= TowerCost.FROST_TOWER
 
     def update(self, dt):
+        self.time += dt
+        if self.time > 2000:
+            self.mobList.append(Mob())
+            self.time = 0
         for m in self.mobList:
             m.update(dt)
             if 840 <= m.x <= 875 and 240 <= m.y <= 280:
                 self.mobList.remove(m)
                 self.player.life -= 1
-                print "life - 1"
+                if self.player.life <= 0:
+                    pygame.event.post(pygame.event.Event(State.GAMEOVER))
 
         self.line = []
         for t in self.towersList:
