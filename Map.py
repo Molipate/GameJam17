@@ -98,3 +98,6 @@ class Map:
     def setCell(self, mouse_pos, value):
         if self.tab[mouse_pos[0] / 35][mouse_pos[1] / 35] == Blocks.EMPTY:
             self.tab[mouse_pos[0] / 35][mouse_pos[1] / 35] = value
+            return True
+
+        return False
